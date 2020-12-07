@@ -3,6 +3,48 @@
 This is very straight if you think about backtracking.
 
 ```cpp
+// This is clean
+// not my solution
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void swap(string &s, int i, int j)
+{
+    char temp;
+    temp = s[i];
+    s[i] = s[j];
+    s[j] = temp;
+}
+
+void generatePermutation(string s, int &len, int curr)
+{
+    if(curr == len)
+        cout << s << endl;
+
+    for(int i = curr; i < len; ++i)
+    {
+        //swap
+        swap(s, curr, i);
+
+        // recurse
+        generatePermutation(s, len, curr+1);
+
+        // backtrack
+        swap(s, curr, i);
+    }
+}
+
+int main()
+{
+    int len =  4;
+    string s = "abcd";
+    generatePermutation(s, len, 0);
+}
+
+```
+
+```cpp
     #include <bits/stdc++.h>
     using namespace std;
 
