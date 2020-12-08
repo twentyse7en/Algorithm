@@ -49,7 +49,7 @@ struct flag{
         }
 };
 
-void solve(vector<vector<string>> res, vector<string> board, int row, int n, flag f)
+void solve(vector<vector<string>> &res, vector<string> board, int row, int n, flag f)
 {
     if(row == n)
     {
