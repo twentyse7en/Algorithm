@@ -99,6 +99,7 @@ int main()
 ## Queue using array
 
 <img src="https://user-images.githubusercontent.com/59721339/101622048-952af000-3a3c-11eb-8e29-24943b35e165.png" align="center" />
+
 ```cpp
 #include <cstdint>
 #include<iostream>
