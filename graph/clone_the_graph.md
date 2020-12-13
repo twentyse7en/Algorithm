@@ -82,3 +82,50 @@ public:
     }
 };
 ```
+
+## Iterative dfs
+
+Iterative dfs is slower than recursive dfs, I have no idea how this should be true.
+
+```cpp
+class Solution {
+    private:
+        map<Node*, Node*> m;
+    
+public:
+    
+    Node* cloneGraph(Node* node) {
+        // let's do a basic dfs
+        if(!node) return NULL;
+        
+        m[node] = new Node(node->val, {});
+        
+        stack<Node*> s;
+        int size;
+        s.push(node);
+        
+        while(!s.empty())
+        {
+            size = s.size();
+            while(size--)
+            {
+                Node* top = s.top(); s.pop();
+                reverse(top->neighbors.begin(), top->neighbors.end());
+                
+                for(Node* curr_neighbor: top->neighbors)
+                {
+                    // if not visited add it to the stack
+                    if(m.find(curr_neighbor) == m.end())
+                    {
+                        m[curr_neighbor] = new Node(curr_neighbor->val, {});
+                        s.push(curr_neighbor);
+                    }
+                    m[top]->neighbors.push_back(m[curr_neighbor]);
+                }
+            }
+        }
+        
+        return m[node];
+    }
+};
+```
