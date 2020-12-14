@@ -84,3 +84,11 @@ def dfs_iterative(adj, s):
 
 ## Fundamental questions
 - [Number of Islands]()
+
+## Application
+- For a weighted graph, DFS traversal of the graph produces the minimum spanning tree and all pair shortest path tree.
+- Detecting cycle in a graph 
+- Path Finding
+- Topological Sorting
+- To test if a graph is bipartite
+- Finding Strongly Connected Components of a graph
