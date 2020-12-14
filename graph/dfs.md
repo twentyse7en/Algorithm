@@ -83,7 +83,7 @@ def dfs_iterative(adj, s):
 ```
 
 ## Fundamental questions
-- [Number of Islands]()
+- [Number of Islands](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/problems/no_of_islands.md)
 
 ## Application
 - For a weighted graph, DFS traversal of the graph produces the minimum spanning tree and all pair shortest path tree.
