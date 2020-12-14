@@ -7,8 +7,8 @@
  
 ## Contents
 - [Representation](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/intro.md#representaion)
-- [BFS](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/dfs.md)
-- [DFS]()
+- [DFS](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/dfs.md)
+- [BFS]()
 - [and more]()
 - [standard question]()
 
