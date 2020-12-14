@@ -6,7 +6,7 @@
  DP is hard but the tools you use for DP is recursion + memo, but for exploring graph you need a even better tool paacck!
  
 ## Contents
-- [Representation](https://github.com/twentyse7en/Algorithm-notes/edit/main/graph/intro.md#representaion)
+- [Representation](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/intro.md#representaion)
 - [BFS](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/dfs.md)
 - [DFS]()
 - [and more]()
