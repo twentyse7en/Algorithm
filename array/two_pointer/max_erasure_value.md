@@ -109,10 +109,9 @@ public:
         vector<int> freq(100001, -1);
         
         // special consideration for start
-        // start -1 changes to 0 in first loop
         // every thing else works as expected
         // it took my 1 hrs so take special care
-        int start = -1;
+        int start = 0;
         int res = 0;
         for(int i = 0; i < nums.size(); ++i)
         {
