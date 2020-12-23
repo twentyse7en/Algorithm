@@ -109,3 +109,127 @@ Because it is greedy. Detailed [explanation](https://stackoverflow.com/questions
 
 [Dense](https://cp-algorithms.com/graph/dijkstra.html) | 
 [Sparse](https://cp-algorithms.com/graph/dijkstra_sparse.html)
+
+<details>
+ <summary> Dense </summary>
+ 
+```cpp
+ const int INF = 1000000000;
+ // adjacent list representation
+ vector<vector<pair<int, int>>> adj;
+
+void dijkstra(int s, vector<int> & d, vector<int> & p) {
+
+    int n = adj.size();
+    d.assign(n, INF); // distance
+    p.assign(n, -1);  // parent
+    vector<bool> u(n, false); // mark visited
+
+    d[s] = 0;
+    for (int i = 0; i < n; i++) {
+    
+        // for finding the unvisited minmum distance
+        int v = -1;
+        for (int j = 0; j < n; j++) {
+            if (!u[j] && (v == -1 || d[j] < d[v]))
+                v = j;
+        }
+
+        // we can stop
+        if (d[v] == INF)
+            break;
+            
+        // mark as visited
+        u[v] = true;
+        
+        
+        for (auto edge : adj[v]) {
+            int to = edge.first;
+            int len = edge.second;
+            
+            // relax
+            if (d[v] + len < d[to]) {
+                d[to] = d[v] + len;
+                p[to] = v;
+            }
+        }
+    }
+}
+
+ ```
+ 
+ For Retrieving path
+ 
+ ```cpp
+ vector<int> restore_path(int s, int t, vector<int> const& p) {
+    vector<int> path;
+
+    for (int v = t; v != s; v = p[v])
+        path.push_back(v);
+    path.push_back(s);
+
+    reverse(path.begin(), path.end());
+    return path;
+}
+ ```
+ 
+</details>
+
+
+<details>
+ <summary>
+  For sparse graph
+ </summary>
+ 
+  __NOTE__: There is no `decrease_key()` instead we add the duplicates(updated values). We immideatly update the distace[] if the value of in priority_queue
+ doesn't match with the distance, then it's a duplicate
+ 
+ ```cpp
+ 
+const int INF = 1000000000;
+vector<vector<pair<int, int>>> adj;
+
+void dijkstra(int s, vector<int> & d, vector<int> & p) {
+
+    int n = adj.size();
+    
+    // initializing
+    d.assign(n, INF);
+    p.assign(n, -1);
+    
+    // mark source as 0
+    d[s] = 0;
+    
+    using pii = pair<int, int>;
+    // priority_queue is default max_heap little hack to make min_heap (BTW it only store pii)
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+    q.push({0, s}); // push the source node
+    
+    while (!q.empty()) {
+    
+        int v = q.top().second;
+        int d_v = q.top().first;
+        q.pop();
+        
+        // to handle duplicates
+        if (d_v != d[v])
+            continue;
+
+        for (auto edge : adj[v]) {
+            int to = edge.first;
+            int len = edge.second;
+
+            if (d[v] + len < d[to]) {
+                d[to] = d[v] + len;
+                p[to] = v;
+                
+                // we don't decrease the key
+                // But add a duplicate with updated values
+                q.push({d[to], to});
+            }
+        }
+    }
+}
+ ```
+ 
+</details>
