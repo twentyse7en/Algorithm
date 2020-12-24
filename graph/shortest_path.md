@@ -3,9 +3,9 @@
 One of the most important topic in graph
 
 ## Contents
- - DAG Relaxation
- - Dijkstra
- - Bellman-ford
+ - [DAG Relaxation]()
+ - [Dijkstra]()
+ - [Bellman-ford]()
  
  ## Introduction
  
@@ -233,3 +233,174 @@ void dijkstra(int s, vector<int> & d, vector<int> & p) {
  ```
  
 </details>
+
+
+## Bellman-Ford
+
+Hurray!! now we can solve graph containing negative weights. However, if the graph contains a negative cycle, then, clearly, the shortest path to some vertices may not exist (due to the fact that the weight of the shortest path must be equal to minus infinity). We can modify the Bellman-Ford to get negative cycle.
+
+**How this works** : Consider there is no negative cycle. We will create an array of distances d[0…n−1], which after execution of the algorithm will contain the answer to the problem. In the beginning we fill it as follows: d[v]=0, and all other elements d[] equal to infinity ∞.
+
+The algorithm consists of several phases. Each phase scans through all edges of the graph, and the algorithm tries to produce relaxation along each edge (a,b) having weight c. Relaxation along the edges is an attempt to improve the value d[b] using value d[a]+c. In fact, it means that we are trying to improve the answer for this vertex using edge (a,b) and current response for vertex a.
+
+It is claimed that n−1 phases of the algorithm are sufficient to correctly calculate the lengths of all shortest paths in the graph.
+
+*Why n-1 ?*
+Because the maximum path length will be n-1 for n vertex.
+
+*How this differ from Dijkstra ?*
+Dijkstra is **greedy** If we select min value in a round, It sure that no other path could exist smaller than this. But if the path contain
+-ve weights there could be a different path that could outperform the small one right now. In Bellman-ford we try all the path that exist for that vertex from source that way we
+are sure about shortest path, It follows **DP**.
+
+*What happens with negative cycles?*
+It will still relax after n-1 round, which is contradiction to our earlier statement. There should not be path with n-1 edges.
+
+<img src="https://user-images.githubusercontent.com/59721339/103064578-54091300-45da-11eb-8122-7aaa9a1df654.png" align="center" />
+
+**Implementation**
+Unlike other graph algorithm we don't need adjacency  list or matrix. Simple 
+edge list will do the work.
+
+<details>
+ <summary>
+  Simple implementation for no negative cycle
+ </summary>
+ 
+```cpp
+// for assuming no-negative cycle
+
+struct edge
+{
+    int a, b, cost;
+};
+
+int n, m, v;
+vector<edge> e;
+const int INF = 1000000000;
+
+void solve()
+{
+    vector<int> d (n, INF);
+    d[v] = 0;
+    // loop n-1 times
+    for (int i=0; i<n-1; ++i)
+        // for all the edges in edge list
+        for (int j=0; j<m; ++j) 
+            if (d[e[j].a] < INF)
+                d[e[j].b] = min (d[e[j].b], d[e[j].a] + e[j].cost);
+    // display d, for example, on the screen
+}
+```
+
+ </details>
+ 
+ <details>
+ <summary>
+  Added simple optimization and way to get parent (still wil not report negative cycle)
+ </summary>
+ 
+```cpp
+\\ improvement : sometimes we don't need n-1 loop, if there is no relaxation
+\\ we can stop.
+\\ added way to recover the parent.
+
+void solve()
+{
+    vector<int> d (n, INF);
+    d[v] = 0;
+    vector<int> p (n, -1);
+
+    for (;;)
+    {
+        bool any = false;
+        for (int j = 0; j < m; ++j)
+            if (d[e[j].a] < INF)
+                if (d[e[j].b] > d[e[j].a] + e[j].cost)
+                {
+                    d[e[j].b] = d[e[j].a] + e[j].cost;
+                    p[e[j].b] = e[j].a;
+                    any = true;
+                }
+        if (!any)  break;
+    }
+
+    if (d[t] == INF)
+        cout << "No path from " << v << " to " << t << ".";
+    else
+    {
+        vector<int> path;
+        for (int cur = t; cur != -1; cur = p[cur])
+            path.push_back (cur);
+        reverse (path.begin(), path.end());
+
+        cout << "Path from " << v << " to " << t << ": ";
+        for (size_t i=0; i<path.size(); ++i)
+            cout << path[i] << ' ';
+    }
+}
+```
+</details>
+
+<details>
+ <summary>
+  To check for negative cycle we need a extra relaxation, we there is relaxation in last round, then there is negative cycle. To retrieve the negative cycle, it is sufficient to remember the last vertex x for which there was a relaxation in nth phase. This vertex will either lie in a negative weight cycle, or is reachable from it. To get the vertices that are guaranteed to lie in a negative cycle, starting from the vertex x, pass through to the predecessors n times. Hence we will get the vertex y, namely the vertex in the cycle earliest reachable from source. We have to go from this vertex, through the predecessors, until we get back to the same vertex y (and it will happen, because relaxation in a negative weight cycle occur in a circular manner).
+ </summary>
+ 
+ ```cpp
+ void solve()
+{
+    vector<int> d (n, INF);
+    d[v] = 0;
+    vector<int> p (n - 1);
+    int x;
+    for (int i=0; i<n; ++i)
+    {
+        x = -1;
+        for (int j=0; j<m; ++j)
+            if (d[e[j].a] < INF)
+                if (d[e[j].b] > d[e[j].a] + e[j].cost)
+                {
+                    d[e[j].b] = max (-INF, d[e[j].a] + e[j].cost);
+                    p[e[j].b] = e[j].a;
+                    x = e[j].b;
+                }
+    }
+
+    if (x == -1)
+        cout << "No negative cycle from " << v;
+    else
+    {
+        // the last node may or mayn't be in the negative cycle.
+        // the neihbours of vertex in negtive cycle also get relaxed.
+        // so we loop backward to make sure we are in negative cycle.
+        int y = x;
+        for (int i=0; i<n; ++i)
+            y = p[y];
+        
+        // now we can start from y and stop when we see y.
+        vector<int> path;
+        for (int cur=y; ; cur=p[cur])
+        {
+            path.push_back (cur);
+            if (cur == y && path.size() > 1)
+                break;
+        }
+        reverse (path.begin(), path.end());
+
+        cout << "Negative cycle: ";
+        for (size_t i=0; i<path.size(); ++i)
+            cout << path[i] << ' ';
+    }
+}
+
+ ```
+ 
+</details>
+
+## Complexity
+Time complexity : O(|V| (|V| + |E|)) (This is for adjacency list, may be O(V\*E) for edge list)
+Space complexity : O(|V|)
+
+## Further Read
+There is even optimised version of Bellman-Ford, visit [source](https://cp-algorithms.com/graph/bellman_ford.html)
