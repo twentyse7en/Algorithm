@@ -3,9 +3,9 @@
 One of the most important topic in graph
 
 ## Contents
- - [DAG Relaxation]()
- - [Dijkstra]()
- - [Bellman-ford]()
+ - [DAG Relaxation](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dag-relaxation)
+ - [Dijkstra](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dijkstra)
+ - [Bellman-ford](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#bellman-ford)
  
  ## Introduction
  
