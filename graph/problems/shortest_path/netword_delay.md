@@ -63,6 +63,57 @@ public:
 };
 ```
 
+```cpp
+class Solution {
+public:
+    int networkDelayTime(vector<vector<int>>& times, int N, int K) {
+        //  It's edge list for Bellman-ford we don't need to change it
+        // anyway it is given weights are positive stil completely implement
+        // Bellman-Ford
+        vector<int> dist(N+1, INT_MAX);
+        // 1 - indexing
+        // # Note: don't forget this for 1-indexing
+        dist[0] = 0;
+        dist[K] = 0;
+        int res = 0;
+        
+        int flag;
+        // for n-1 times relax
+        // on Nth we check if there is any change
+        // #NOTE: dont forget we looping N times
+        for(int i = 0; i < N; ++i)
+        {
+            flag = 0;
+            // relax all the edges
+            for(vector<int> edge: times)
+            {
+                int  from = edge[0];
+                int to = edge[1];
+                int w = edge[2];
+                if(dist[from] != INT_MAX && dist[to] > dist[from] + w)
+                {
+                    dist[to] = dist[from] + w;
+                    flag = 1;
+                }
+            }
+            
+            // no update
+            if(!flag)
+                break;
+        }
+        
+        // this unnecessary in this problem
+        if(flag)
+            return -1;
+        
+         for(int x: dist) 
+              res = max(res, x);
+            
+         return res == INT_MAX? -1: res;
+    }
+};
+```
 ## COMPLEXITY
 
-PQ used so O((V + E)\*log V)
+Dijkstra: PQ used so O((V + E)\*log V)
+
