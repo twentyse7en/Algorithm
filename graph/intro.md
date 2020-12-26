@@ -9,7 +9,8 @@
 - [Representation](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/intro.md#representaion)
 - [DFS](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/dfs.md)
 - [BFS]()
-- [and more]()
+- [Disjoint set union]()
+- [Minimum Spanning Tree]()
 - [standard question]()
 
 ## Important types of graph
