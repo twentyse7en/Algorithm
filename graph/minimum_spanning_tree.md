@@ -1,16 +1,14 @@
 # Minimum Spanning Tree
 
 ## Index
-- [Introduction]()
-- []()
-- []()
+- [Introduction](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/minimum_spanning_tree.md#introduction)
+- [Properties](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/minimum_spanning_tree.md#properties)
+- [Kruskal's Algorithm](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/minimum_spanning_tree.md#kruskals-algorithm)
 
 ## Introduction
 
 What is a minimum spanning tree ?
-<p>
 Given a weighted undirected graph.
-</p>
 - We want to find a subtree of this graph which connects all vertices (i.e. it is a spanning tree)
 - has the least weight (i.e. the sum of weights of all the edges is minimum) of all possible spanning trees.
 This spanning tree is called a minimum spanning tree.
@@ -34,7 +32,7 @@ spanning tree = <sup>|E|</sup>C<sub>|v|</sub> - no. of cycles.
 
 (side note: This feels like a application of dsu)
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/MST_kruskal_en.gif" align="center" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/MST_kruskal_en.gif" align="center" width="300" height="300"/>
 
 Implementation details: 
  - make every vertex a set O(V)
@@ -105,6 +103,6 @@ for (Edge e : edges) {
 ```
 [source](https://cp-algorithms.com/graph/mst_kruskal_with_dsu.html)
 
-** TODO **
+**TODO**
 - Prim's Algorithm
 - advantage of one over another
