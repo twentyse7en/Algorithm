@@ -3,6 +3,7 @@
 One of the most important topic in graph
 
 ## Contents
+ - [BFS](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#bfs)
  - [DAG Relaxation](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dag-relaxation)
  - [Dijkstra](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dijkstra)
  - [Bellman-ford](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#bellman-ford)
@@ -15,6 +16,10 @@ One of the most important topic in graph
   
   <img src="https://user-images.githubusercontent.com/59721339/102963126-5f8f0800-450e-11eb-9b2f-6bb26f2d692f.png" align="center" />
   
+  ## BFS
+  - This is just normal bfs, every level is added as the distance. This is
+  very simple as it sound. But comes handy in some problems, so don't underestimate.
+
   ## DAG Relaxation
   - For Directed Acyclic Graph
   - weight can be negative
