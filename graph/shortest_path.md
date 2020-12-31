@@ -8,7 +8,13 @@ One of the most important topic in graph
  - [Dijkstra](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dijkstra)
  - [Bellman-ford](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#bellman-ford)
  
- ## Introduction
+## How  to Approach shortest path problem
+
+ - No weight : `BFS`
+ - Weight, But positive : `Dijskstra`
+ - Weight, Negative : `Bellman-ford`
+
+## Introduction
  
  If the graph have no weights we can use __bfs__ to find the shortest path between two vertex. The weighted graph is the more general case.
  In weighted graph there could be **negative cycles** in that case shortest path is **undefined**.
