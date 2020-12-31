@@ -7,6 +7,7 @@ One of the most important topic in graph
  - [DAG Relaxation](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dag-relaxation)
  - [Dijkstra](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#dijkstra)
  - [Bellman-ford](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#bellman-ford)
+ - [Floyd-Warshall](https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/shortest_path.md#floyd-warshal)
  
 ## How  to Approach shortest path problem
 
@@ -409,9 +410,55 @@ void solve()
  
 </details>
 
-## Complexity
+**Complexity**  
 Time complexity : O(|V| (|V| + |E|)) (This is for adjacency list, may be O(V\*E) for edge list)
 Space complexity : O(|V|)
 
-## Further Read
+**Further Read**   
 There is even optimised version of Bellman-Ford, visit [source](https://cp-algorithms.com/graph/bellman_ford.html)
+
+## Floyd-Warshall
+
+This is **all pair shortest path** algorithm, why would we need this? we could 
+alternatively use *Single source shortest path* for all vertex. Let's check
+complexity
+
+- BFS : O(v<sup>3</sup>) or `O(V(V+E))`
+- Dijkstra : `O(VELogV)` or O(V<sup>3</sup>logV)
+- Bellman-Ford : O(V<sup>2</sup>E) or O(V<sup>4</sup>)
+
+Natual question is can we do better ?
+
+- Johnson's algorithm (not covered yet)
+- Floyd warshall
+
+[Video explanation](https://www.youtube.com/watch?v=oNI0rf2P9gE) by Abdul Bari  
+**Intuition** : Can we reach `V` from `U`, through any intermediate node.
+<img src="https://user-images.githubusercontent.com/59721339/103414208-ff016a00-4ba2-11eb-918b-44651301f6b4.png" align="center" />
+Ex:
+<img src="https://user-images.githubusercontent.com/59721339/103414151-b944a180-4ba2-11eb-8d06-a95a3a5e90f3.png" align="center" />  
+Table updation
+<img src="https://user-images.githubusercontent.com/59721339/103414289-5b648980-4ba3-11eb-827c-cf7ff0a41d35.png" align="center" />
+
+**Time Complexity**: O(V<sup>3</sup>)
+
+```cpp
+int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
+
+    // create the initial table
+    int INF = (int) 1e6; // INF = n * maxWeight = 100 * 10^4 = 10^6
+    vector<vector<int>> dist = vector(n, vector<int>(n, INF)); // dist[i][j] is the minimum distance from i to j
+    for (int i = 0; i < n; i++) dist[i][i] = 0;
+    for (vector<int>& edge : edges) {
+        int v1 = edge[0], v2 = edge[1], w = edge[2];
+        dist[v1][v2] = dist[v2][v1] = w;
+    }
+
+    // Floyd Warshall's shortest path algorithm
+    for (int k = 0; k < n; k++)
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+    
+}
+```
