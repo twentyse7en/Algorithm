@@ -2,6 +2,47 @@
 
 This is very straight if you think about backtracking.
 
+*Intution* : This is example of decrease and conquer. We break problem to 
+subproblem of size n-1 and single remaining problem. Example workflow.  
+```
+Original problem : [1, 2, 3, 4]
+[4, 2, 3, | 1] , [1, 4, 3, | 2], [1, 2, 4 | 3], [1, 2, 3, | 4]
+// in that step we select one value and put to last.
+// we decrease the length, so we don't swap to already selected value.
+
+```
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+
+void permutation(vector<int> a, int n)
+{
+    if(n == 1)
+    {
+        for(int x: a)
+            cout << x << " ";
+        cout << endl;
+        return;
+    }
+
+    for(int i = 0; i < n; ++i)
+    {
+        swap(a[i], a[n-1]);
+        permutation(a, n -1 );
+        swap(a[i], a[n-1]);
+    }
+}
+
+
+int main()
+{
+    vector<int> a = {1, 2, 3, 4, 5, 6};
+    permutation(a, a.size());
+}
+```
+
 ```cpp
 // This is clean
 // not my solution

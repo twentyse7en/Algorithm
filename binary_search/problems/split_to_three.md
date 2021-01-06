@@ -21,6 +21,7 @@ int waysToSplit(vector<int>& nums)
 	{
 		if(nums[i]>nums.back()/3) break; //so that sum(subarray1)<=sum(nums)/3
 
+        // both elements will not be in the n-1 position
 		vector<int>::iterator low=lower_bound(nums.begin()+i+1,nums.end()-1,2*nums[i]); //so sum(subarray2)>=sum(subarray1)
 		vector<int>::iterator up=upper_bound(low,nums.end()-1,nums[i]+(nums.back()-nums[i])/2); //so that sum(subarray2)<=sum(subarray3)
 		result=(result+up-low)%d;
@@ -28,6 +29,8 @@ int waysToSplit(vector<int>& nums)
 	return result;
 }
 ```
+
+Below is a slightly different implementation of same logic.
 
 ```cpp
 class Solution {
