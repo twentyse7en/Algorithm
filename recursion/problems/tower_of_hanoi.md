@@ -12,5 +12,37 @@ This is very standard problem.
 
 <img src="https://github.com/twentyse7en/Algorithm-notes/blob/main/recursion/problems/tower_of_hanoi.png" />
 
+## Code
 
+```cpp
+class Solution{
+    public:
+    // You need to complete this function
 
+    // avoid space at the starting of the string in "move disk....."
+    long long toh(int N, int from, int to, int aux) {
+        // Your code here
+        if(N == 1)
+        {
+            printf("move disk %d from rod %d to rod %d\n", 1, from, to);
+            return 1;
+        }
+        
+        long long count = 0;
+        // decrease
+        count += toh(N-1, from, aux, to);
+        
+        printf("move disk %d from rod %d to rod %d\n", N, from, to);
+        count += 1;
+        // conquer
+        count += toh(N-1, aux, to, from);
+        return count;
+    }
+
+};
+```
+
+## Complexity
+
+*Time complexity* : O(2<sup>n</sup>)  
+*Space complexity* : O(n)
