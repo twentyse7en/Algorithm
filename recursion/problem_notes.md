@@ -50,4 +50,6 @@ of the reversed stack.
 *Induction* : Insert the N on the bottom
 Time complexity : O(N<sup>2</sup>)
 
--
+## Problems List
+- [Print N-bit binary numbers having more 1s than 0s ](https://practice.geeksforgeeks.org/problems/print-n-bit-binary-numbers-having-more-1s-than-0s0252/1#)
+

@@ -11,7 +11,7 @@ One of the most important topic in graph
  
 ## How  to Approach shortest path problem
 
- - No weight : `BFS`
+ - No weight : `BFS`, `Bi-directional bfs` 
  - Weight, But positive : `Dijskstra`
  - Weight, Negative : `Bellman-ford`
 
@@ -19,8 +19,9 @@ One of the most important topic in graph
  
  If the graph have no weights we can use __bfs__ to find the shortest path between two vertex. The weighted graph is the more general case.
  In weighted graph there could be **negative cycles** in that case shortest path is **undefined**.
-  A negative-weight cycle is a path π starting and ending at same vertex with w(π) < 0.
-  
+  A negative-weight cycle is a path π starting and ending at same vertex with w(π) < 0.  
+  Don't ignore bfs, and Bi-directiona bfs, because they appear even in Hard problems. **TODO**: [Bidirectional BFS](https://efficientcodeblog.wordpress.com/2017/12/13/bidirectional-search-two-end-bfs/)
+  checkout the problem `word ladder` available at archives.
   <img src="https://user-images.githubusercontent.com/59721339/102963126-5f8f0800-450e-11eb-9b2f-6bb26f2d692f.png" align="center" />
   
   ## BFS

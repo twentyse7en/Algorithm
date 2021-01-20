@@ -6,6 +6,7 @@
 ## Approach
 
 <img src="https://github.com/twentyse7en/Algorithm-notes/blob/main/graph/problems/assests/0-1%20matrix.png" align="center" />
+
 ## code
 
 ### DP
