@@ -30,3 +30,6 @@ public:
 You can find similar problem at the end of these posts  
 [similar problems i](https://leetcode.com/problems/find-the-most-competitive-subsequence/discuss/952786/JavaC%2B%2BPython-One-Pass-Stack-Solution) |
 [similar problems ii](https://leetcode.com/problems/find-the-most-competitive-subsequence/discuss/952794/JavaPython-3-1-pass-Monotonic-Stack-w-14-SIMILAR-problems-brief-explanation-and-analysis.)
+
+Again a [Next Greater Element](https://leetcode.com/problems/next-greater-element-i/)
+with monotonically increasing stack. I failed to recognize it.

@@ -3,7 +3,7 @@
 ## Intro
 
 - Don't provide direct access - `O(N)`
-- Adding and removing from front of list is - `O(N)`
+- Adding and removing from front of list is - `O(1)`
 - There are actually a lot of edge cases, but we can use some tricks
 to solve them easily.
 
@@ -45,6 +45,7 @@ while(tmp)
 ```
 
 ## Basic Problems
+- [Remove duplicates from sorted LL](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
 - [Delete duplicates from unsorted LL](https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1#)
 - [Design a linked list](https://leetcode.com/problems/design-linked-list/)
 - 
@@ -52,6 +53,9 @@ while(tmp)
 ## Patterns
 *Two pointer* : There are lot of problems take advantage of this. 
 - Keeps a constant distance : [delete kth last element](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+- If you get confused about the edge cases, consider smallest 
+  input that is, LL with one node, and design the solution for it.
+  It is easy to formulate the solution.
 ```cpp
 class Solution {
 public:
